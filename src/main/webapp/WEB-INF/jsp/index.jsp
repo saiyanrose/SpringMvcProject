@@ -40,5 +40,5 @@
 </nav>
 	<form id="logout-form" action="<%=request.getContextPath()%>/logout" method="post"></form>
 </body>
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/logout/logout.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/logout.js"></script>
 </html>
