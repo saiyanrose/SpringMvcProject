@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+						http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+						http://www.springframework.org/schema/context
+						http://www.springframework.org/schema/context/spring-context-3.0.xsd	
+						http://www.springframework.org/schema/mvc
+						http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+
+	<!--Support for validating -->
+	<!--Support for formatting Date,Calendar -->
+	<!-- Support for reading and writing JSON -->
+	<mvc:annotation-driven />
+
+	<!-- scan for particular package or sub pacakge -->
+	<!-- searching packages for Components -->
+	<!-- Component indicates that a class might be a candidate for creating	a bean -->
+	<context:component-scan base-package="com.mvc" />
+
+	<!-- enable you to render models in a browser -->
+	<bean id="viewResolver"	class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<!-- restrict the URL paths specifc interceptors apply to. -->
+	<!-- <mvc:interceptors>
+		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
+		<mvc:interceptor>
+			<mvc:mapping path="/dashboard" />
+			<bean class="com.mvc.security.SecurityInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors> -->
+
+	<!-- To serve these resources with a 1-year future expiration to ensure maximum use of the browser cache-->
+	<!-- and reduction in HTTP requests made by the browser -->	
+	<mvc:resources mapping="/resources/**" location="/resources/" cache-period="31556926"/>	
+	<mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/" cache-period="31556926"/>
+</beans>
