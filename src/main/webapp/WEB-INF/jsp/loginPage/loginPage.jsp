@@ -57,7 +57,7 @@
 							</p>
 							
 							<p>
-								Don't have an account? <a href="<%=request.getContextPath()%>/forgot-password" class="link-info">Register here</a>
+								Don't have an account? <a href="<%=request.getContextPath()%>/register" class="link-info">Register here</a>
 							</p>							
 						</form>
 

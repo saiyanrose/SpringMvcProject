@@ -10,8 +10,7 @@ public class DashboardController {
 
 	@RequestMapping(value="/dashboard",method = RequestMethod.GET)
 	public String dashboardPage(Model model){//show data on view page 
-		try {
-			
+		try {			
 			model.addAttribute("pageTitle","Home-ProjectName");
 		}catch (Exception e) {
 			System.out.println("Home Controller-->welcomePage: "+e.getStackTrace());
