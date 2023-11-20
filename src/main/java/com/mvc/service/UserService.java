@@ -1,7 +1,7 @@
 package com.mvc.service;
 
-import java.util.Optional;
 import java.util.Set;
+import java.util.function.Predicate;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -31,22 +31,21 @@ public class UserService {
 		try {
 			app.beginTransaction();
 			factory=app.getFactory();
-			session=app.getSession();
+			session=app.getSession();			
 			
-			//get user by email
 			@SuppressWarnings("unchecked")
-			Query<User> query=session.createQuery("from User where email=:email");
+			Query<User> query=session.createQuery("from User where email=:email");//get user by email
 			query.setParameter("email",email);
 			query.setCacheable(true);//first level cache
-			User user=query.uniqueResult();
+			User user=query.uniqueResult();			
 			
-			//check User exist or not
-			Optional<User>userOptional=Optional.ofNullable(user);
-			if(userOptional.isPresent()) {
+			Predicate<User>checkExits=u->u!=null;//check User exist or not
+			boolean userExist=checkExits.test(user);				
+			if(userExist) {
 				return user;
 			}else {
 				throw new UserNotFoundException("User not found with email: "+email);
-			}			
+			}
 		}catch (Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -71,19 +70,17 @@ public class UserService {
 			roles.setUser(user);
 			user.setEnabled(true);
 			user.setRoles(Set.of(roles));
-			user.setPassword(passwordEncoder.encode(user.getPassword()));		
+			user.setPassword(passwordEncoder.encode(user.getPassword()));			
 			
-			//save user
-			session.save(user);	
-			transaction.commit();
+			session.save(user);//save user				
 			return true;
 		}catch (Exception e) {
 			e.printStackTrace();
 		}finally {
+			transaction.commit();
 			factory.close();
 			session.close();
 		}
-		return false;
-		
+		return false;		
 	}
 }

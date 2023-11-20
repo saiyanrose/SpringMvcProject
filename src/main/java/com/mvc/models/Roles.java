@@ -1,5 +1,6 @@
 package com.mvc.models;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,15 +9,20 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 @Entity
 @Table(name = "test_roles")
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Roles {
 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
 	private Long role_id;
 
-	private String role_name;
+	private String role_name;	
 	
 	@ManyToOne
 	@JoinColumn(name="user_id")

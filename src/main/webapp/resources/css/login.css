@@ -1,0 +1,12 @@
+.error{
+	color:red;
+}
+
+input:invalid {
+  border: red solid 3px;
+}
+
+.req {
+  color: red;
+}
+

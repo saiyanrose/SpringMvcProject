@@ -9,7 +9,7 @@
 <script type="text/javascript" src="<%=request.getContextPath()%>/webjars/jquery/3.6.4/jquery.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/webjars/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/webjars/bootstrap/5.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/registerPage.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/registerPage.css?version=2">
 <title>${pageTitle}</title>
 </head>
 <body>
@@ -37,19 +37,21 @@
 										<div class="alert alert-danger" role="alert">${error}</div>
 									</c:if>
 									
-									<form action="<%=request.getContextPath()%>/register/user" method="post">
+									<form action="<%=request.getContextPath()%>/register/user" method="post" id="register-form">
 										<div class="row">
 											<div class="col-md-6 mb-4">
 												<div class="form-outline">
-													<input type="text" id="form3Example1m" name="first_name" class="form-control form-control-lg" />
-													<label class="form-label" for="form3Example1m">First name</label>
+													<input type="text" id="first_name" name="first_name" class="form-control form-control-lg" />
+													<label class="form-label" for="form3Example1m">First name <span class="req">*</span></label>
+													<span id="firstNameError" class="error"></span>
 												</div>
 											</div>
 
 											<div class="col-md-6 mb-4">
 												<div class="form-outline">
-													<input type="text" id="form3Example1n" name="last_name"	class="form-control form-control-lg" />
-													<label class="form-label" for="form3Example1n">Last name</label>
+													<input type="text" id="last_name" name="last_name"	class="form-control form-control-lg" />
+													<label class="form-label" for="form3Example1n">Last name <span class="req">*</span></label>
+													<span id="lastNameError" class="error"></span>
 												</div>
 											</div>
 										</div>
@@ -57,28 +59,31 @@
 										<div class="row">
 											<div class="col-md-6 mb-4">
 												<div class="form-outline">
-													<input type="email" id="form3Example1m1" name="email" class="form-control form-control-lg" />
-													<label class="form-label" for="form3Example1m1">Email</label>
+													<input type="email" id="email" name="email" class="form-control form-control-lg" />
+													<label class="form-label" for="form3Example1m1">Email <span class="req">*</span></label>
+													<span id="email" class="error"></span>
 												</div>
 											</div>
 											
 											<div class="col-md-6 mb-4">
 												<div class="form-outline">
-													<input type="password" id="form3Example1n1" name="password"	class="form-control form-control-lg" />
-													<label class="form-label" for="form3Example1n1">Password</label>
+													<input type="password" id="password" name="password"	class="form-control form-control-lg" />
+													<label class="form-label" for="form3Example1n1">Password <span class="req">*</span></label>
+													<span id="passwordError" class="error"></span>
 												</div>
 											</div>
 										</div>
 
 										<div class="form-outline mb-4">
-											<input type="text" id="form3Example8" name="address" class="form-control form-control-lg" />
-											<label class="form-label" for="form3Example8">Address</label>
+											<input type="text" id="address" name="address" class="form-control form-control-lg" />
+											<label class="form-label" for="form3Example8">Address <span class="req">*</span></label>
+											<span id="addressError" class="error"></span>
 										</div>
 
 										<div
 											class="d-md-flex justify-content-start align-items-center mb-4 py-2">
 
-											<h6 class="mb-0 me-4">Gender:</h6>
+											<h6 class="mb-0 me-4">Gender: <span class="req">*</span></h6>
 
 											<div class="form-check form-check-inline mb-0 me-4">
 												<input class="form-check-input" type="radio" name="gender" id="femaleGender" value="female" />
@@ -86,7 +91,7 @@
 											</div>
 
 											<div class="form-check form-check-inline mb-0 me-4">
-												<input class="form-check-input" type="radio" name="gender" id="maleGender" value="male" />
+												<input class="form-check-input" type="radio" name="gender" id="maleGender" value="male" checked="checked"/>
 												<label class="form-check-label" for="maleGender">Male</label>
 											</div>
 
@@ -94,31 +99,39 @@
 												<input class="form-check-input" type="radio" name="gender" id="otherGender" value="other" />
 												<label class="form-check-label" for="otherGender">Other</label>
 											</div>
+											<span id="genderError" class="error"></span>
 										</div>
 
 										<div class="row">
 											<div class="col-md-6 mb-4">
-												<select class="select" name="country">
-													<option value="">Country</option>													
+												<label class="form-label" for="form3Example90">Country <span class="req">*</span></label>
+												<select class="select" name="country" id="country">
+													<option value="">Select Country</option>													
 												</select>
+												<span id="countryError" class="error"></span>
 											</div>
 											
 											<div class="col-md-6 mb-4">
-												<select class="select" name="state">
-													<option value="">State</option>													
+												<label class="form-label" for="form3Example90">State <span class="req">*</span></label>
+												<select class="select" name="state" id="state">
+													<option value="">Select State</option>													
 												</select>
+												<span id="stateError" class="error"></span>
 											</div>
 											
 											<div class="col-md-6 mb-4">
-												<select class="select" name="city">
-													<option value="">City</option>													
+												<label class="form-label" for="form3Example90">City <span class="req">*</span></label>
+												<select class="select" name="city" id="city">
+													<option value="">Select City</option>													
 												</select>
+												<span id="cityError" class="error"></span>
 											</div>
 										</div>										
 
 										<div class="form-outline mb-4">
-											<input type="text" id="form3Example90" name="pincode" class="form-control form-control-lg" />
-											<label class="form-label" for="form3Example90">Pincode</label>
+											<input type="text" id="pincode" name="pincode" class="form-control form-control-lg" />
+											<label class="form-label" for="form3Example90">Pincode <span class="req">*</span></label>
+											<span id="pincodeError" class="error"></span>
 										</div>										
 
 										<div class="d-flex justify-content-end pt-3">
@@ -136,4 +149,5 @@
 		</div>
 	</section>
 </body>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/register.js?v=2"></script>
 </html>

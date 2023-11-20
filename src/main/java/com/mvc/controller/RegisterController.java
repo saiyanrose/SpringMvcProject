@@ -17,6 +17,9 @@ public class RegisterController {
 
 	@RequestMapping(value ="/register",method = RequestMethod.GET)
 	public String registerPage(Model model) {
+		//country
+		//state
+		//cities		
 		model.addAttribute("pageTitle", "Register-ProjectName");
 		return "register/registerPage";
 	}
